@@ -40,6 +40,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Login");
 
         btLogin.setText("Entrar");
@@ -95,7 +96,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btLogin)
-                .addGap(18, 48, Short.MAX_VALUE)
+                .addGap(18, 45, Short.MAX_VALUE)
                 .addComponent(lbStatus)
                 .addContainerGap())
         );
