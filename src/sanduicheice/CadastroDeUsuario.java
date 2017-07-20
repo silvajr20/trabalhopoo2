@@ -9,6 +9,6 @@ package Model;
  *
  * @author a11321BSI262
  */
-public class CadastroDeProdutos {
+public class CadastroDeUsuario {
     
 }
