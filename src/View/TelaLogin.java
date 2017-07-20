@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sanduicheice;
+package View;
 
+import Controller.ConexaoBancoDeDados;
 import javax.swing.SwingUtilities;
 
 /**
