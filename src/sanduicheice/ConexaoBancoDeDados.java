@@ -35,7 +35,7 @@ public class ConexaoBancoDeDados {
     
         try{
             Statement stmt = c.createStatement();
-            ResultSet resultado = stmt.executeQuery("select * from users where name = '" + usuario + "' and password = '" + senha + "' ");
+            ResultSet resultado = stmt.executeQuery("select * from users where nome = '" + usuario + "' and senha = '" + senha + "' ");
         
             if(resultado.next()){
                 return true;
