@@ -29,6 +29,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         btCadProd = new javax.swing.JButton();
         btCadPed = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,6 +49,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Cadastrar Cliente");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Cadastrar nota");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Cadastrar Usuário");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -54,7 +78,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btCadProd)
-                    .addComponent(btCadPed))
+                    .addComponent(btCadPed)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addContainerGap(241, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -64,7 +91,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(btCadProd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btCadPed)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addGap(26, 26, 26)
+                .addComponent(jButton3)
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         pack();
@@ -80,10 +113,30 @@ public class TelaPrincipal extends javax.swing.JFrame {
         new CadastroDePedidos().setVisible(true);
     }//GEN-LAST:event_btCadPedActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        CadastroDeClientes c = new CadastroDeClientes();
+        c.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        NotaDeCompras n = new NotaDeCompras();
+        n.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        new CadastroUsuario().setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCadPed;
     private javax.swing.JButton btCadProd;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     // End of variables declaration//GEN-END:variables
 }

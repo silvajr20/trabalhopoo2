@@ -20,6 +20,8 @@ public class TelaLogin extends javax.swing.JFrame {
     public ConexaoBancoDeDados c= ConexaoBancoDeDados.getInstance();
     public TelaLogin() {
         initComponents();
+        
+        
     }
 
     /**
@@ -40,6 +42,7 @@ public class TelaLogin extends javax.swing.JFrame {
         lbStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela Inicial");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Login");
@@ -109,7 +112,7 @@ public class TelaLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         //System.out.println("Entrou aqui");
         //new TelaPrincipal().setVisible(true);
-        
+        /*
         SwingUtilities.invokeLater(new Runnable() {
            public void run()
            {
@@ -121,8 +124,8 @@ public class TelaLogin extends javax.swing.JFrame {
                 }
            }
        });
-        
-        
+        */
+        new TelaPrincipal().setVisible(true);
     }//GEN-LAST:event_btLoginActionPerformed
 
     /**

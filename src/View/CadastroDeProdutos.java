@@ -5,6 +5,8 @@
  */
 package View;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Avenger
@@ -17,7 +19,15 @@ public class CadastroDeProdutos extends javax.swing.JFrame {
     public CadastroDeProdutos() {
         initComponents();
     }
-
+    
+     public boolean hasNumbers(final String string){
+            String numbers = "0123456789";
+            for(char a : string.toCharArray())
+              for(char b : numbers.toCharArray())
+                if(a == b) return true;
+            return false;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,7 +44,7 @@ public class CadastroDeProdutos extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtPreco = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,9 +66,14 @@ public class CadastroDeProdutos extends javax.swing.JFrame {
             }
         });
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txtPreco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtPrecoActionPerformed(evt);
+            }
+        });
+        txtPreco.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPrecoKeyPressed(evt);
             }
         });
 
@@ -66,7 +81,10 @@ public class CadastroDeProdutos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(235, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -76,10 +94,7 @@ public class CadastroDeProdutos extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addGap(10, 10, 10)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(10, 10, 10)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel3)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jButton1)
                             .addGap(38, 38, 38)
@@ -90,7 +105,10 @@ public class CadastroDeProdutos extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(138, 138, 138)
+                .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(142, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -102,12 +120,8 @@ public class CadastroDeProdutos extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(18, 18, 18)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel3)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(1, 1, 1)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(76, 76, 76)
+                    .addComponent(jLabel3)
+                    .addGap(83, 83, 83)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jButton1)
                         .addComponent(jButton2)
@@ -122,9 +136,18 @@ public class CadastroDeProdutos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtPrecoActionPerformed
+
+    private void txtPrecoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecoKeyPressed
+        // TODO add your handling code here:
+        if(! hasNumbers(txtPreco.getText())){
+            JOptionPane.showMessageDialog(null, "Insira corretamente o valor do produto.");
+            txtPreco.setFocusable(rootPaneCheckingEnabled);
+            txtPreco.setText("");
+        }
+    }//GEN-LAST:event_txtPrecoKeyPressed
 
     /**
      * @param args the command line arguments
@@ -169,6 +192,6 @@ public class CadastroDeProdutos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txtPreco;
     // End of variables declaration//GEN-END:variables
 }

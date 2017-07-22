@@ -7,11 +7,13 @@ package Model;
 
 /**
  *
- * @author fabio
+ * @author Avenger
  */
-public class CadastroDePedidosM {
-    
-    
-    
+public class ValidacaoEntradaTM {
+        
+    public boolean validaEntradaDeDados(){        
+        return false;
+    }
+        
     
 }

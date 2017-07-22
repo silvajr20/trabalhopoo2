@@ -7,8 +7,12 @@ package Model;
 
 /**
  *
- * @author a11321BSI262
+ * @author Avenger
  */
-public class CadastroDeUsuario {
+public interface InterfaceValidacao {
+    
+    public void validaEntradaDeDados();
+    
+    
     
 }
