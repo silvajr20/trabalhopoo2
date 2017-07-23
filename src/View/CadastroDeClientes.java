@@ -20,6 +20,7 @@ public class CadastroDeClientes extends javax.swing.JFrame{
      * Creates new form CadastroDeClientes
      */
     public CadastroDeClientes() {
+        this.setUndecorated(true);
         initComponents();
         
         
@@ -55,6 +56,7 @@ public class CadastroDeClientes extends javax.swing.JFrame{
         txtCPF = new javax.swing.JTextField();
         txtTelefone = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,6 +116,13 @@ public class CadastroDeClientes extends javax.swing.JFrame{
 
         jLabel5.setText("Telefone:");
 
+        jButton1.setText("Sair");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,7 +158,9 @@ public class CadastroDeClientes extends javax.swing.JFrame{
                 .addComponent(btnExcluir)
                 .addGap(35, 35, 35)
                 .addComponent(btnLimpar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +187,8 @@ public class CadastroDeClientes extends javax.swing.JFrame{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnExcluir)
-                    .addComponent(btnLimpar))
+                    .addComponent(btnLimpar)
+                    .addComponent(jButton1))
                 .addGap(48, 48, 48))
         );
 
@@ -243,6 +255,11 @@ public class CadastroDeClientes extends javax.swing.JFrame{
         }
     }//GEN-LAST:event_txtTelefoneKeyPressed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -282,6 +299,7 @@ public class CadastroDeClientes extends javax.swing.JFrame{
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

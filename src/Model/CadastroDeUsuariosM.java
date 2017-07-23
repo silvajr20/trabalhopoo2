@@ -5,6 +5,8 @@
  */
 package Model;
 
+import Controller.ConexaoBancoDeDados;
+
 /**
  *
  * @author fabio
@@ -13,10 +15,13 @@ public class CadastroDeUsuariosM extends ValidacaoEntradaTM{
     
     
     public String login, senha;
+    public char tipo;
+    public ConexaoBancoDeDados c = ConexaoBancoDeDados.getInstance();
     
-    public CadastroDeUsuariosM(String login, String senha) {
+    public CadastroDeUsuariosM(String login, String senha, char tipo) {
         this.login = login;
         this.senha = senha;
+        this.tipo = tipo;
     }
     
     @Override
@@ -35,7 +40,9 @@ public class CadastroDeUsuariosM extends ValidacaoEntradaTM{
     }
    
     
-    
+    public void cadastraUsuario(){
+        c.cadastraUsuario(this.login, this.senha, this.tipo);
+    }
     
     
     

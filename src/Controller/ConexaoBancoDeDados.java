@@ -8,6 +8,8 @@
 package Controller;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author fabio
@@ -45,6 +47,21 @@ public class ConexaoBancoDeDados {
         }
         
         return false;
+    }
+    
+    public void cadastraUsuario(String usuario, String senha, char tipo){
+        
+        
+        Statement stmt;
+        try {
+            stmt = c.createStatement();
+            String query = "insert into users (nome, senha, tipo) values ('" + usuario + "' , '" + senha + "' , '" + tipo + "'"  + ")";
+            stmt.executeUpdate(query);
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexaoBancoDeDados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     
