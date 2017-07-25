@@ -64,6 +64,36 @@ public class ConexaoBancoDeDados {
         
     }
     
+    public void cadastraProduto(String descprod, float vlrprod, int qtdprod){
+        
+        
+        Statement stmt;
+        try {
+            stmt = c.createStatement();
+            String query = "insert into produto (descprod, vlrprod, qtdprod) values ('" + descprod + "' , '" + vlrprod + "', " + "'" + qtdprod + "'" + ")";
+            stmt.executeUpdate(query);
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexaoBancoDeDados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public void cadastraCliente(String cpfcnpj, String email, String nomecli, String telefone){
+        
+        
+        Statement stmt;
+        try {
+            stmt = c.createStatement();
+            String query = "insert into clientes values ('" + cpfcnpj + "' , '" + nomecli + "', '" + email + "' , '" + telefone + "')";
+            stmt.executeUpdate(query);
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexaoBancoDeDados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
     
     public static ConexaoBancoDeDados getInstance(){
         if( instancia == null){

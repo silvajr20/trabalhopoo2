@@ -5,6 +5,8 @@
  */
 package Model;
 
+import Controller.ConexaoBancoDeDados;
+
 /**
  *
  * @author fabio
@@ -13,13 +15,17 @@ public class CadastroDeProdutosM extends ValidacaoEntradaTM {
     
     public String nome;
     public float preco;
+    public int qtdEstoque;
+    public ConexaoBancoDeDados c = ConexaoBancoDeDados.getInstance();
     
-    public CadastroDeProdutosM(String nome, float preco) {
+    public CadastroDeProdutosM(String nome, float preco, int qtdEstoque) {
         this.nome = nome;
         this.preco = preco;
+        this.qtdEstoque = qtdEstoque;
     }
     
-  
+    
+    @Override
     public boolean validaEntradaDeDados(){
         if(nome.equals("")){
             System.out.println("Insira corretamente o nome do produto.");
@@ -34,6 +40,9 @@ public class CadastroDeProdutosM extends ValidacaoEntradaTM {
     }
     
     
+    public void cadastraProduto(){
+        c.cadastraProduto(this.nome, this.preco, this.qtdEstoque);
+    }
     
     
     

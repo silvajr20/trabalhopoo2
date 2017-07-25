@@ -5,6 +5,8 @@
  */
 package Model;
 
+import Controller.ConexaoBancoDeDados;
+
 /**
  *
  * @author fabio
@@ -12,6 +14,7 @@ package Model;
 public class CadastroDeClientesM extends ValidacaoEntradaTM{
 
     public String nome, email, cpf, telefone;
+    public ConexaoBancoDeDados c = ConexaoBancoDeDados.getInstance();
     
     public CadastroDeClientesM(String nome, String email, String cpf, String telefone) {
         this.nome = nome;
@@ -43,6 +46,9 @@ public class CadastroDeClientesM extends ValidacaoEntradaTM{
     }
     
     
+    public void cadastraCliente(){
+        c.cadastraCliente(this.cpf, this.email, this.nome, this.telefone);
+    }
     
     
 }
