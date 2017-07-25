@@ -19,12 +19,34 @@ public class ConexaoBancoDeDados {
     
     private Connection c = null;
     
+    private ConectaBanco acaoConectar = null;
+    
     private String usuarioBanco = "sanduser";
     private String senhaBanco = "12345678";
     
-    private ConexaoBancoDeDados(){
+    private ConexaoBancoDeDados(String banco){
         try{
-            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/sanduiche_iche", usuarioBanco, senhaBanco);
+            switch(banco){
+                case "mysql":
+                    acaoConectar = new ConectaMySQL(usuarioBanco, senhaBanco);
+                    break;
+                case "psql":
+                    
+                    acaoConectar = new ConectaPsql(usuarioBanco, senhaBanco);
+                    break;
+                case "oracle":
+                    
+                    acaoConectar = new ConectaOracle(usuarioBanco, senhaBanco);
+                    break;
+                    
+                default:
+                    acaoConectar = new ConectaMySQL(usuarioBanco, senhaBanco);
+                    
+                    break;
+            }
+            if(acaoConectar!=null)
+                c = acaoConectar.ConectarAoBanco();
+            
             
         } catch(Exception e){
             e.printStackTrace();
@@ -97,7 +119,7 @@ public class ConexaoBancoDeDados {
     
     public static ConexaoBancoDeDados getInstance(){
         if( instancia == null){
-            instancia = new ConexaoBancoDeDados();
+            instancia = new ConexaoBancoDeDados("mysql");
         }
         return instancia;
     }

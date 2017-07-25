@@ -11,7 +11,7 @@ package Model;
  */
 public interface InterfaceValidacao {
     
-    public void validaEntradaDeDados();
+    public boolean validaEntradaDeDados();
     
     
     

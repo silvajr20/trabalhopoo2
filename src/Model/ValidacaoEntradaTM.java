@@ -9,7 +9,8 @@ package Model;
  *
  * @author Avenger
  */
-public class ValidacaoEntradaTM {
+public class ValidacaoEntradaTM implements InterfaceValidacao{
+        
         
     public boolean validaEntradaDeDados(){        
         return false;

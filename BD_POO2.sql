@@ -1,11 +1,6 @@
 CREATE TABLE produto (codprod INTEGER NOT NULL AUTO_INCREMENT, descprod VARCHAR (50) NOT NULL, vlrprod FLOAT NOT NULL, qtdprod SMALLINT NOT NULL DEFAULT '0', PRIMARY KEY (codprod));
 
-CREATE TABLE clientes (
-codcli varchar(14) NOT NULL, 
-nomecli VARCHAR(50) NOT NULL, 
-emailcli varchar(50) NOT NULL,
- telefone VARCHAR(20),   
- PRIMARY KEY (codcli));
+CREATE TABLE clientes (codcli varchar(14) NOT NULL, nomecli VARCHAR(50) NOT NULL, emailcli varchar(50) NOT NULL, telefone VARCHAR(20),    PRIMARY KEY (codcli));
 
 
 
