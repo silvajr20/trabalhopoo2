@@ -5,12 +5,20 @@
  */
 package View;
 
+import com.sun.jndi.ldap.Connection;
+import java.awt.List;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  *
  * @author Avenger
  */
 public class CadastroDePedidos extends javax.swing.JFrame {
 
+    Connection con;
     /**
      * Creates new form CadastroDePedidos
      */
@@ -55,6 +63,11 @@ public class CadastroDePedidos extends javax.swing.JFrame {
         });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Sair");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -123,6 +136,37 @@ public class CadastroDePedidos extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        
+        public List<CadastroDePedidos> recuperarItensPedidosPorNome(String nome) throws SQLException {
+        String sentencaSelect = "SELECT * FROM Itens_pedido WHERE NOME LIKE ?";
+        PreparedStatement statementSelect = con.prepareStatement(sentencaSelect);
+        ResultSet resultsetSelect = statementSelect.executeQuery();
+        List<CadastroDePedidos> Pedido = new ArrayList<CadastroDePedidos>();
+        while (resultsetSelect.next()) {
+            Pedido.add(recuperarObjeto(resultsetSelect));
+        }
+        resultsetSelect.close();
+        statementSelect.close();
+        return Pedido;
+    }
+    private CadastroDePedidos recuperarObjeto(ResultSet resultsetSelect) {
+        CadastroDePedidos Pedido = new CadastroDePedidos();
+        Pedido.setCodProd(resultsetSelect.getLong("codprod"));
+        Pedido.setNomeProd(resultsetSelect.getString("nomprod"));
+        return Pedido;
+    }
+        
+        
+    
+    
+    
+        
+        
+        
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
