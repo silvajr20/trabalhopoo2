@@ -5,11 +5,14 @@
  */
 package View;
 
+import Controller.ConectaPsql;
 import com.sun.jndi.ldap.Connection;
 import java.awt.List;
+import java.awt.event.ItemEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -18,14 +21,62 @@ import java.util.ArrayList;
  */
 public class CadastroDePedidos extends javax.swing.JFrame {
 
-    Connection con;
+    
     /**
      * Creates new form CadastroDePedidos
      */
     public CadastroDePedidos() {
         this.setUndecorated(true);
         initComponents();
+          
     }
+    
+    Connection con;
+    ConectaPsql c;
+ 
+    
+    
+    public ArrayList findAll() throws SQLException{
+        Statement stmt = con.createStatement();
+        ResultSet resultSet = stmt.executeQuery("select nome from produtos");
+        ArrayList list=new ArrayList();
+        while ( resultSet.next() ) {
+             list.add(resultSet.getString( 1 )); 
+        }
+        return list;
+     }
+    
+     
+        public void itemStateChanged(ItemEvent e){    
+            
+            List<Cadastro> ItensPedido;
+
+           ItensPedido = new LivroDao().getLista("%%");
+            
+            
+            jComboBox1.removeAllItems();
+            for (int i = 0; i < ItensPedido.size(); i++){
+                    jComboBox1.addItem(ItensPedido get(i).getNome());
+            }
+           
+            
+            if(e.getStateChange() == ItemEvent.SELECTED){    
+
+                
+            try{                
+                  Statement st;    
+                  ResultSet rs;    
+
+           c.ConectarAoBanco();
+         
+           String SQL = "select itens_pedido from proc where area='"+jComboBox1.getSelectedItem()+"'";    
+           rs = st.executeQuery(SQL);    
+           while(rs.next()){    
+                jComboBox1.addItem(rs.getString("Descitem"));}    
+           }    
+            catch(Exception er) {}    
+     }    
+     }  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -140,24 +191,6 @@ public class CadastroDePedidos extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
         
-        public List<CadastroDePedidos> recuperarItensPedidosPorNome(String nome) throws SQLException {
-        String sentencaSelect = "SELECT * FROM Itens_pedido WHERE NOME LIKE ?";
-        PreparedStatement statementSelect = con.prepareStatement(sentencaSelect);
-        ResultSet resultsetSelect = statementSelect.executeQuery();
-        List<CadastroDePedidos> Pedido = new ArrayList<CadastroDePedidos>();
-        while (resultsetSelect.next()) {
-            Pedido.add(recuperarObjeto(resultsetSelect));
-        }
-        resultsetSelect.close();
-        statementSelect.close();
-        return Pedido;
-    }
-    private CadastroDePedidos recuperarObjeto(ResultSet resultsetSelect) {
-        CadastroDePedidos Pedido = new CadastroDePedidos();
-        Pedido.setCodProd(resultsetSelect.getLong("codprod"));
-        Pedido.setNomeProd(resultsetSelect.getString("nomprod"));
-        return Pedido;
-    }
         
         
     
