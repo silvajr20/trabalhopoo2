@@ -7,9 +7,13 @@
  */
 package Controller;
 
+import Model.Produto;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.ArrayList;
+
+
 /**
  *
  * @author fabio
@@ -18,7 +22,6 @@ public class ConexaoBancoDeDados {
     private static ConexaoBancoDeDados instancia;
     
     private Connection c = null;
-    
     private ConectaBanco acaoConectar = null;
     
     private String usuarioBanco = "sanduser";
@@ -51,6 +54,24 @@ public class ConexaoBancoDeDados {
         } catch(Exception e){
             e.printStackTrace();
         }
+    }
+    
+    public ArrayList<Produto> getProdutos(){
+        
+        ArrayList<Produto> produtos = new ArrayList();
+        
+        try{
+            Statement stmt = c.createStatement();
+            ResultSet resultado = stmt.executeQuery("select * from produtos");
+        
+            while(resultado.next()){
+                produtos.add(new Produto( resultado.getString("descprod"), resultado.getFloat("vlrprod"), resultado.getInt("qtdprod")));
+            }
+        } catch(Exception e){
+            e.getStackTrace();
+        }
+        
+        return produtos;
     }
     
     // Valida usuário e senha no banco
