@@ -31,7 +31,8 @@ public class CadastroDePedidos extends javax.swing.JFrame {
     public CadastroDePedidos(String codcli) {
         this.setUndecorated(true);
         initComponents();
-        this.populaComboBox();
+        this.populaComboBoxProdutos();
+        this.populaComboBoxAdicionais();
         this.iniciaPedido(codcli);
     }
      
@@ -43,12 +44,21 @@ public class CadastroDePedidos extends javax.swing.JFrame {
         this.lbCli.setText(codcli);
         this.lbStatus.setText("Nenhum Item adicionado");
         this.lbValorTotal.setText("R$ 0,00");
+        this.cbAdicional.setVisible(false);
     }
 
-    private void populaComboBox(){
+    private void populaComboBoxProdutos(){
         ArrayList<Produto> prods = Produto.getProdutos();
         for(Produto p : prods){
             cbItens.addItem(p);
+        }
+    }
+    
+    private void populaComboBoxAdicionais(){
+        ArrayList<Produto> adds = Produto.getAdicionais();
+        cbAdicional.addItem(new Produto(-1, "-", 0,0));
+        for(Produto p : adds){
+            cbAdicional.addItem(p);
         }
     }
     
@@ -77,6 +87,8 @@ public class CadastroDePedidos extends javax.swing.JFrame {
         lbStatus = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         lbValorTotal = new javax.swing.JLabel();
+        cbAdicional = new javax.swing.JComboBox<>();
+        btConsultar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,6 +118,12 @@ public class CadastroDePedidos extends javax.swing.JFrame {
             }
         });
 
+        cbItens.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbItensActionPerformed(evt);
+            }
+        });
+
         btAddItem.setText("Add Item");
         btAddItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,6 +146,13 @@ public class CadastroDePedidos extends javax.swing.JFrame {
         jLabel5.setText("Valor Total:");
 
         lbValorTotal.setText("jLabel6");
+
+        btConsultar.setText("Consultar");
+        btConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btConsultarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -167,7 +192,10 @@ public class CadastroDePedidos extends javax.swing.JFrame {
                                 .addComponent(cbItens, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btAddItem, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(tfQtdItem, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(tfQtdItem)
+                                .addComponent(btConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(cbAdicional, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -188,8 +216,12 @@ public class CadastroDePedidos extends javax.swing.JFrame {
                     .addComponent(cbItens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfQtdItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btAddItem)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btAddItem)
+                    .addComponent(btConsultar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbAdicional, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(lbStatus))
@@ -197,7 +229,7 @@ public class CadastroDePedidos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(lbValorTotal))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton1)
@@ -231,6 +263,11 @@ public class CadastroDePedidos extends javax.swing.JFrame {
         float novoValorPed = this.ped.getVlrnota() +  vlrProdAdd*qtdProdAdd;
         // adiciona um novo item de pedido na lista (arraylist)
         itens.add(new PedidoItem(this.ped.getNuped(),  codProdAdd, qtdProdAdd ));
+        
+        if(this.cbAdicional.isVisible() && ((Produto) this.cbAdicional.getSelectedItem()).getCodprod() != -1){
+            itens.add(new PedidoItem(this.ped.getNuped(),  ((Produto) this.cbAdicional.getSelectedItem()).getCodprod(), 1 ));
+        }
+        
         // atualiza o valor da nota
         this.ped.setVlrnota(novoValorPed);
         
@@ -247,6 +284,20 @@ public class CadastroDePedidos extends javax.swing.JFrame {
         this.SalvaItensPedidoBanco();
         this.EncerraPedido();
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void cbItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbItensActionPerformed
+        // TODO add your handling code here:
+        if(((Produto) this.cbItens.getSelectedItem()).getCodprod() == 3 || ((Produto) this.cbItens.getSelectedItem()).getCodprod() ==4 || ((Produto) this.cbItens.getSelectedItem()).getCodprod() == 5){
+            this.cbAdicional.setVisible(true);
+        } else {
+            this.cbAdicional.setVisible(false);
+        }
+    }//GEN-LAST:event_cbItensActionPerformed
+
+    private void btConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarActionPerformed
+        // TODO add your handling code here:
+        new ExibePedido().setVisible(true);
+    }//GEN-LAST:event_btConsultarActionPerformed
 
     
     private void SalvaPedidoBanco() {
@@ -268,9 +319,11 @@ public class CadastroDePedidos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAddItem;
+    private javax.swing.JButton btConsultar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox<Produto> cbAdicional;
     private javax.swing.JComboBox<Produto> cbItens;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

@@ -7,14 +7,15 @@
             <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/Controller/ConectaMySQL.java</file>
             <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/View/TelaPrincipal.java</file>
             <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/Model/ValidacaoEntradaTM.java</file>
-            <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/Model/CadastroDePedidosM.java</file>
             <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/Model/InterfaceValidacao.java</file>
             <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/View/CadastroUsuario.java</file>
             <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/View/CadastroDePedidos.java</file>
+            <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/View/ExibePedido.java</file>
             <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/View/ExibiPedidos.java</file>
             <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/Controller/ConectaOracle.java</file>
             <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/View/CadastroDeProdutos.java</file>
             <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/Controller/ConectaBanco.java</file>
+            <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/Model/Cliente.java</file>
             <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/Model/AdicionalErvasFinas.java</file>
             <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/Model/AdicionalCreamCheese.java</file>
             <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/View/NotaDeCompras.java</file>
@@ -25,8 +26,10 @@
             <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/Model/AdicionalMolhoAgridoce.java</file>
             <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/Model/CadastroDeProdutosM.java</file>
             <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/Model/Produto.java</file>
+            <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/Model/Pedido.java</file>
             <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/View/CadastroDeClientes.java</file>
-            <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/Model/CadastroDeClientesM.java</file>
+            <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/Model/PedidoItem.java</file>
+            <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/View/CabecalhoPedido.java</file>
             <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/Controller/ConectaPsql.java</file>
             <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/Model/SanduicheArabe.java</file>
             <file>file:/home/fabio/Estudos/Programação%20orientada%20a%20objetos%202/SanduicheIche/src/Model/CadastroDeUsuariosM.java</file>

@@ -11,10 +11,13 @@ import Model.PedidoItem;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -28,7 +31,6 @@ public class ExibePedido extends javax.swing.JFrame {
     public ExibePedido() {
         this.setUndecorated(true);
         initComponents();
-        
     }
 
     /**

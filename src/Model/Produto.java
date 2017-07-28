@@ -68,4 +68,8 @@ public class Produto {
         return ConexaoBancoDeDados.getInstance().getProdutos();
     }
     
+    public static ArrayList<Produto> getAdicionais(){
+        return ConexaoBancoDeDados.getInstance().getAdicionais();
+    }
+    
 }

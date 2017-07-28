@@ -78,7 +78,24 @@ public class ConexaoBancoDeDados {
         
         try{
             Statement stmt = c.createStatement();
-            ResultSet resultado = stmt.executeQuery("select * from produto");
+            ResultSet resultado = stmt.executeQuery("select * from produto where codprod not in (6,7,8)");
+        
+            while(resultado.next()){
+                produtos.add(new Produto( resultado.getInt("codprod"),  resultado.getString("descprod"), resultado.getFloat("vlrprod"), resultado.getInt("qtdprod")));
+            }
+        } catch(Exception e){
+            e.getStackTrace();
+        }
+        
+        return produtos;
+    }
+    public ArrayList<Produto> getAdicionais(){
+        
+        ArrayList<Produto> produtos = new ArrayList();
+        
+        try{
+            Statement stmt = c.createStatement();
+            ResultSet resultado = stmt.executeQuery("select * from produto where codprod in (6,7,8)");
         
             while(resultado.next()){
                 produtos.add(new Produto( resultado.getInt("codprod"),  resultado.getString("descprod"), resultado.getFloat("vlrprod"), resultado.getInt("qtdprod")));
