@@ -5,15 +5,14 @@
  */
 package View;
 
-import Controller.ConectaPsql;
-import com.sun.jndi.ldap.Connection;
-import java.awt.List;
-import java.awt.event.ItemEvent;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import Model.Pedido;
+import Model.PedidoItem;
+import Model.Produto;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Vector;
+import javax.swing.JList;
+import javax.swing.ListModel;
 
 /**
  *
@@ -25,59 +24,34 @@ public class CadastroDePedidos extends javax.swing.JFrame {
     /**
      * Creates new form CadastroDePedidos
      */
-    public CadastroDePedidos() {
+    
+    private Pedido ped;
+    private Vector<PedidoItem> itens;
+    
+    public CadastroDePedidos(String codcli) {
         this.setUndecorated(true);
         initComponents();
-          
+        this.populaComboBox();
+        this.iniciaPedido(codcli);
+    }
+     
+    private void iniciaPedido(String codcli) {
+        int nroPed = Math.abs((int) new Date().getTime());
+        this.ped = new Pedido(nroPed , 0, codcli); // pedido inicia com valor zero
+        this.itens = new Vector();
+        this.lbNroPed.setText(Integer.toString(nroPed));
+        this.lbCli.setText(codcli);
+        this.lbStatus.setText("Nenhum Item adicionado");
+        this.lbValorTotal.setText("R$ 0,00");
+    }
+
+    private void populaComboBox(){
+        ArrayList<Produto> prods = Produto.getProdutos();
+        for(Produto p : prods){
+            cbItens.addItem(p);
+        }
     }
     
-    Connection con;
-    ConectaPsql c;
- 
-    
-    
-    public ArrayList findAll() throws SQLException{
-        Statement stmt = con.createStatement();
-        ResultSet resultSet = stmt.executeQuery("select nome from produtos");
-        ArrayList list=new ArrayList();
-        while ( resultSet.next() ) {
-             list.add(resultSet.getString( 1 )); 
-        }
-        return list;
-     }
-    
-     
-        public void itemStateChanged(ItemEvent e){    
-            
-            List<Cadastro> ItensPedido;
-
-           ItensPedido = new LivroDao().getLista("%%");
-            
-            
-            jComboBox1.removeAllItems();
-            for (int i = 0; i < ItensPedido.size(); i++){
-                    jComboBox1.addItem(ItensPedido get(i).getNome());
-            }
-           
-            
-            if(e.getStateChange() == ItemEvent.SELECTED){    
-
-                
-            try{                
-                  Statement st;    
-                  ResultSet rs;    
-
-           c.ConectarAoBanco();
-         
-           String SQL = "select itens_pedido from proc where area='"+jComboBox1.getSelectedItem()+"'";    
-           rs = st.executeQuery(SQL);    
-           while(rs.next()){    
-                jComboBox1.addItem(rs.getString("Descitem"));}    
-           }    
-            catch(Exception er) {}    
-     }    
-     }  
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -88,21 +62,33 @@ public class CadastroDePedidos extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         btnSalvar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
+        cbItens = new javax.swing.JComboBox<>();
+        tfQtdItem = new javax.swing.JTextField();
+        btAddItem = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        lbNroPed = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        lbCli = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lbStatus = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lbValorTotal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Cadastro de Pedidos");
 
-        jLabel2.setText("Produtos:");
-
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setText("Excluir");
 
@@ -113,19 +99,35 @@ public class CadastroDePedidos extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-
         jButton1.setText("Sair");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        btAddItem.setText("Add Item");
+        btAddItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAddItemActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Nro Pedido");
+
+        lbNroPed.setText("jLabel3");
+
+        jLabel3.setText("Cliente:");
+
+        lbCli.setText("jLabel4");
+
+        jLabel4.setText("Status:");
+
+        lbStatus.setText("jLabel5");
+
+        jLabel5.setText("Valor Total:");
+
+        lbValorTotal.setText("jLabel6");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,46 +136,78 @@ public class CadastroDePedidos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(34, 34, 34)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1))
-                .addContainerGap(87, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(21, 125, Short.MAX_VALUE)
-                    .addComponent(btnSalvar)
-                    .addGap(57, 57, 57)
-                    .addComponent(btnExcluir)
-                    .addGap(47, 47, 47)
-                    .addComponent(btnLimpar)
-                    .addGap(0, 132, Short.MAX_VALUE)))
+                        .addComponent(btnSalvar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExcluir)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLimpar)
+                        .addGap(39, 39, 39)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbStatus))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbValorTotal))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbCli))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbNroPed))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(cbItens, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btAddItem, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(tfQtdItem, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(79, 79, 79)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 275, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnSalvar)
-                        .addComponent(btnExcluir)
-                        .addComponent(btnLimpar))
-                    .addGap(0, 71, Short.MAX_VALUE)))
+                    .addComponent(lbNroPed))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(lbCli))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbItens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfQtdItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btAddItem)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(lbStatus))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(lbValorTotal))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSalvar)
+                            .addComponent(btnExcluir)
+                            .addComponent(btnLimpar))
+                        .addGap(36, 36, 36))))
         );
 
         pack();
@@ -188,61 +222,67 @@ public class CadastroDePedidos extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void btAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddItemActionPerformed
         // TODO add your handling code here:
         
+        int codProdAdd = ((Produto) this.cbItens.getSelectedItem()).getCodprod(); // cod produto a ser adicionado no pedido
+        float vlrProdAdd = ((Produto) this.cbItens.getSelectedItem()).getVlrprod(); // valor do prod a ser adicionado no pedido
+        int qtdProdAdd = Integer.parseInt(this.tfQtdItem.getText()); // qtdade do prod
+        float novoValorPed = this.ped.getVlrnota() +  vlrProdAdd*qtdProdAdd;
+        // adiciona um novo item de pedido na lista (arraylist)
+        itens.add(new PedidoItem(this.ped.getNuped(),  codProdAdd, qtdProdAdd ));
+        // atualiza o valor da nota
+        this.ped.setVlrnota(novoValorPed);
         
-        
-    
-    
-    
-        
-        
-        
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+        this.lbStatus.setText("Item " + ((Produto) this.cbItens.getSelectedItem()).toString() + " foi adicionado ao pedido");
+                
+        this.lbValorTotal.setText("R$ " + novoValorPed + "\n teste");
+        this.tfQtdItem.setText("");
+        this.cbItens.setSelectedIndex(0);
+    }//GEN-LAST:event_btAddItemActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroDePedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroDePedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroDePedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroDePedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // TODO add your handling code here:
+        this.SalvaPedidoBanco();
+        this.SalvaItensPedidoBanco();
+        this.EncerraPedido();
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CadastroDePedidos().setVisible(true);
-            }
-        });
+    
+    private void SalvaPedidoBanco() {
+        this.ped.gravaPedido();
     }
 
+    private void SalvaItensPedidoBanco() {
+        for(PedidoItem ped : this.itens){
+            ped.cadastraItemPed();
+        }
+    }
+
+    private void EncerraPedido() {
+        this.dispose();
+    }
+
+    
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAddItem;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox<Produto> cbItens;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel lbCli;
+    private javax.swing.JLabel lbNroPed;
+    private javax.swing.JLabel lbStatus;
+    private javax.swing.JLabel lbValorTotal;
+    private javax.swing.JTextField tfQtdItem;
     // End of variables declaration//GEN-END:variables
+
 }

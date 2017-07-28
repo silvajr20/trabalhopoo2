@@ -5,21 +5,31 @@
  */
 package Model;
 
+import Controller.ConexaoBancoDeDados;
+import java.util.ArrayList;
+
 /**
  *
  * @author fabio
  */
 public class Produto {
+    private int codprod;
     private String descrprod;
     private float vlrprod;
     private int qtdprod;
 
-    public Produto(String descrprod, float vlrprod, int qtdprod) {
+    public Produto(int codprod, String descrprod, float vlrprod, int qtdprod) {
+        this.codprod = codprod;
         this.descrprod = descrprod;
         this.vlrprod = vlrprod;
         this.qtdprod = qtdprod;
     }
 
+    @Override
+    public String toString(){
+        return this.descrprod;
+    }
+    
     public String getDescrprod() {
         return descrprod;
     }
@@ -43,7 +53,19 @@ public class Produto {
     public void setQtdprod(int qtdprod) {
         this.qtdprod = qtdprod;
     }
+
+    public int getCodprod() {
+        return codprod;
+    }
+
+    public void setCodprod(int codprod) {
+        this.codprod = codprod;
+    }
     
     
+    
+    public static ArrayList<Produto> getProdutos(){
+        return ConexaoBancoDeDados.getInstance().getProdutos();
+    }
     
 }

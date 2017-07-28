@@ -7,6 +7,8 @@
  */
 package Controller;
 
+import Model.Cliente;
+import Model.PedidoItem;
 import Model.Produto;
 import java.sql.*;
 import java.util.logging.Level;
@@ -56,16 +58,30 @@ public class ConexaoBancoDeDados {
         }
     }
     
+    public float getPrecoProduto(int codprod){
+        try{
+            Statement stmt = c.createStatement();
+            ResultSet resultado = stmt.executeQuery("select vlrprod from produto where codprod = '" + codprod + "'");
+        
+            if(resultado.next()){
+                return resultado.getFloat("vlrprod");
+            }
+        } catch(Exception e){
+            e.getStackTrace();
+        }
+        return -1; // -1 significa que não achou o produto
+    }
+    
     public ArrayList<Produto> getProdutos(){
         
         ArrayList<Produto> produtos = new ArrayList();
         
         try{
             Statement stmt = c.createStatement();
-            ResultSet resultado = stmt.executeQuery("select * from produtos");
+            ResultSet resultado = stmt.executeQuery("select * from produto");
         
             while(resultado.next()){
-                produtos.add(new Produto( resultado.getString("descprod"), resultado.getFloat("vlrprod"), resultado.getInt("qtdprod")));
+                produtos.add(new Produto( resultado.getInt("codprod"),  resultado.getString("descprod"), resultado.getFloat("vlrprod"), resultado.getInt("qtdprod")));
             }
         } catch(Exception e){
             e.getStackTrace();
@@ -73,6 +89,63 @@ public class ConexaoBancoDeDados {
         
         return produtos;
     }
+    
+    public ArrayList<Cliente> getClientes(){
+        
+        ArrayList<Cliente> clis = new ArrayList();
+        
+        try{
+            Statement stmt = c.createStatement();
+            ResultSet resultado = stmt.executeQuery("select * from clientes");
+        
+            while(resultado.next()){
+                clis.add(new Cliente(resultado.getString("codcli"),  resultado.getString("nomecli"),  resultado.getString("emailcli"),  resultado.getString("telefone")));
+            }
+        } catch(Exception e){
+            e.getStackTrace();
+        }
+        
+        return clis;
+    }
+    
+    /*
+    public ArrayList<PedidoItem> getItensPedido(int nuped){
+    
+        ArrayList<PedidoItem> itens = new ArrayList();
+        
+        try{
+            Statement stmt = c.createStatement();
+            ResultSet resultado = stmt.executeQuery("select * from itens_pedido where nuped = '" + nuped + "'");
+        
+            while(resultado.next()){
+                itens.add(new PedidoItem( resultado.getInt("nuped") , resultado.getInt("codprod") , resultado.getInt("qtdprod") ));
+            }
+        } catch(Exception e){
+            e.getStackTrace();
+        }
+        
+        return itens;
+    }
+    
+    public ResultSet getItensPedidoFormatado(int nuped){
+    
+        
+        try{
+            int count = 0;
+            Statement stmt = c.createStatement();
+            ResultSet resultado = stmt.executeQuery("select pro.descprod, ite.qtdprod, pro.vlrprod, (ite.qtdprod*pro.vlrprod) as subtotal from itens_pedido ite inner join produto pro on pro.codprod = ite.codprod where nuped = '" + nuped + "'");
+        
+            if(resultado.next()){
+                return resultado;
+            }
+            
+        } catch(Exception e){
+            e.getStackTrace();
+        }
+        
+        return null;
+    } */
+
     
     // Valida usuário e senha no banco
     // retorna true se o usuário existe, false se não
@@ -136,7 +209,32 @@ public class ConexaoBancoDeDados {
         }
         
     }
+
+    public void cadastraPedido(int nuped, float vlrnota, String codcli) {
     
+        Statement stmt;
+        try {
+            stmt = c.createStatement();
+            String query = "insert into pedido values ('" + nuped + "' , '" + vlrnota + "', '" + codcli + "')";
+            stmt.executeUpdate(query);
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexaoBancoDeDados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void cadastraItemPed(int nuped, int codprod, int qtdprod) {
+    
+        Statement stmt;
+        try {
+            stmt = c.createStatement();
+            String query = "insert into itens_pedido values ('" + nuped + "' , '" + codprod + "', '" + qtdprod + "')";
+            stmt.executeUpdate(query);
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexaoBancoDeDados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     public static ConexaoBancoDeDados getInstance(){
         if( instancia == null){
@@ -144,6 +242,7 @@ public class ConexaoBancoDeDados {
         }
         return instancia;
     }
+
     
     
 

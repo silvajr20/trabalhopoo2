@@ -9,6 +9,7 @@ package Model;
  *
  * @author fabio
  */
+// codprod = 6
 public class AdicionalCreamCheese extends Adicional{
 
     
@@ -23,7 +24,7 @@ public class AdicionalCreamCheese extends Adicional{
 
     @Override
     public float getPreco() {
-        return sanduiche.getPreco() + 3.5f;
+        return sanduiche.getPreco() + c.getPrecoProduto(6);
     }
     
 }

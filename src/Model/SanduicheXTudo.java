@@ -9,10 +9,11 @@ package Model;
  *
  * @author fabio
  */
+// codprod = 5
 public class SanduicheXTudo extends Sanduiche{
     
     public float getPreco(){
-        return 12.3f;
+        return c.getPrecoProduto(5);
     }
     
     public String getDescricao(){

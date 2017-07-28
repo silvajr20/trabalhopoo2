@@ -125,7 +125,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btCadPedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadPedActionPerformed
         // TODO add your handling code here:
-        new CadastroDePedidos().setVisible(true);
+        new CabecalhoPedido().setVisible(true);
     }//GEN-LAST:event_btCadPedActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -149,8 +149,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
-
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCadPed;

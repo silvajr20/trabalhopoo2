@@ -5,11 +5,15 @@
  */
 package Model;
 
+import Controller.ConexaoBancoDeDados;
+
 /**
  *
  * @author fabio
  */
 public abstract class Sanduiche {
+    
+    protected ConexaoBancoDeDados c = ConexaoBancoDeDados.getInstance();
     
     public abstract float getPreco();
     
