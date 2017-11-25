@@ -10,7 +10,6 @@ import java.sql.DriverManager;
 
 /**
  *
- * @author fabio
  */
 public class ConectaPsql extends ConectaBanco{
 

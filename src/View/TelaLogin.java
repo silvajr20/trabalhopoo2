@@ -10,7 +10,6 @@ import javax.swing.SwingUtilities;
 
 /**
  *
- * @author fabio
  */
 public class TelaLogin extends javax.swing.JFrame {
 
@@ -136,6 +135,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 } else {
                     lbStatus.setText("usuario ou senha errada");
                 }
+               
            }
        });
     }//GEN-LAST:event_btLoginActionPerformed

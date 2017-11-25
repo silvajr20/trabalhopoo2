@@ -7,7 +7,6 @@ package Model;
 
 /**
  *
- * @author Avenger
  */
 public interface InterfaceValidacao {
     

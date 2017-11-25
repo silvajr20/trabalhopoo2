@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 /**
  *
- * @author fabio
  */
 public class ConexaoBancoDeDados {
     private static ConexaoBancoDeDados instancia;
@@ -26,8 +25,8 @@ public class ConexaoBancoDeDados {
     private Connection c = null;
     private ConectaBanco acaoConectar = null;
     
-    private String usuarioBanco = "sanduser";
-    private String senhaBanco = "12345678";
+    private String usuarioBanco = "postgres";
+    private String senhaBanco = "root";
     
     private ConexaoBancoDeDados(String banco){
         try{
@@ -78,10 +77,10 @@ public class ConexaoBancoDeDados {
         
         try{
             Statement stmt = c.createStatement();
-            ResultSet resultado = stmt.executeQuery("select * from produto where codprod not in (6,7,8)");
+            ResultSet resultado = stmt.executeQuery("select * from produto");
         
             while(resultado.next()){
-                produtos.add(new Produto( resultado.getInt("codprod"),  resultado.getString("descprod"), resultado.getFloat("vlrprod"), resultado.getInt("qtdprod")));
+                produtos.add(new Produto( resultado.getInt("codProd"),  resultado.getString("descprod"), resultado.getFloat("vlrprod"), resultado.getInt("qtdprod")));
             }
         } catch(Exception e){
             e.getStackTrace();
@@ -116,7 +115,7 @@ public class ConexaoBancoDeDados {
             ResultSet resultado = stmt.executeQuery("select * from clientes");
         
             while(resultado.next()){
-                clis.add(new Cliente(resultado.getString("codcli"),  resultado.getString("nomecli"),  resultado.getString("emailcli"),  resultado.getString("telefone")));
+                clis.add(new Cliente(resultado.getString("cpfcnpj"),  resultado.getString("nomecli"),  resultado.getString("email"),  resultado.getString("telefone")));
             }
         } catch(Exception e){
             e.getStackTrace();
@@ -255,7 +254,7 @@ public class ConexaoBancoDeDados {
     
     public static ConexaoBancoDeDados getInstance(){
         if( instancia == null){
-            instancia = new ConexaoBancoDeDados("mysql");
+            instancia = new ConexaoBancoDeDados("psql");
         }
         return instancia;
     }

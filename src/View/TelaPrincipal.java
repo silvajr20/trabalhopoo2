@@ -7,7 +7,6 @@ package View;
 
 /**
  *
- * @author fabio
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 

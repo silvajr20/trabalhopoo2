@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author fabio
  */
 public class ConectaMySQL extends ConectaBanco{
 

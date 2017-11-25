@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 /**
  *
- * @author fabio
  */
 public class Produto {
     private int codprod;

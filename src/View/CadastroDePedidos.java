@@ -15,8 +15,7 @@ import javax.swing.JList;
 import javax.swing.ListModel;
 
 /**
- *
- * @author Avenger
+
  */
 public class CadastroDePedidos extends javax.swing.JFrame {
 

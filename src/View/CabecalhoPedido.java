@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 /**
  *
- * @author fabio
  */
 public class CabecalhoPedido extends javax.swing.JFrame {
 

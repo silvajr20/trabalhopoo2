@@ -7,7 +7,6 @@ package Model;
 
 /**
  *
- * @author fabio
  */
 // codprod = 5
 public class SanduicheXTudo extends Sanduiche{

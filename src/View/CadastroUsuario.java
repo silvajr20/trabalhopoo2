@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Avenger
  */
 public class CadastroUsuario extends javax.swing.JFrame {
 

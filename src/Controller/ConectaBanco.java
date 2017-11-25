@@ -9,7 +9,6 @@ import java.sql.Connection;
 
 /**
  *
- * @author fabio
  * Padrão Strategy
  */
 public abstract class ConectaBanco {

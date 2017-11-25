@@ -7,7 +7,6 @@ package Model;
 
 /**
  *
- * @author fabio
  */
 // codprod = 6
 public class AdicionalCreamCheese extends Adicional{

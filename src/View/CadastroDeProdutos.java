@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Avenger
  */
 public class CadastroDeProdutos extends javax.swing.JFrame {
 

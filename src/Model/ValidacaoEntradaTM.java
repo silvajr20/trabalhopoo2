@@ -7,7 +7,6 @@ package Model;
 
 /**
  *
- * @author Avenger
  */
 public class ValidacaoEntradaTM implements InterfaceValidacao{
         

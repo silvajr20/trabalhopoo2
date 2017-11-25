@@ -9,7 +9,6 @@ import Controller.ConexaoBancoDeDados;
 
 /**
  *
- * @author fabio
  */
 public class CadastroDeProdutosM extends ValidacaoEntradaTM {
     

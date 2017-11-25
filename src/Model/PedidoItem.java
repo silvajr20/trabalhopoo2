@@ -9,7 +9,6 @@ import Controller.ConexaoBancoDeDados;
 
 /**
  *
- * @author fabio
  */
 public class PedidoItem {
     private int nuped;

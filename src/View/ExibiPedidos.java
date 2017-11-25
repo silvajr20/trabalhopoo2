@@ -7,7 +7,6 @@ package View;
 
 /**
  *
- * @author Avenger
  */
 public class ExibiPedidos extends javax.swing.JFrame {
 

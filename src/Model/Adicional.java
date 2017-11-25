@@ -7,7 +7,6 @@ package Model;
 
 /**
  *
- * @author fabio
  */
 public abstract class Adicional extends Sanduiche{
     protected Sanduiche sanduiche;

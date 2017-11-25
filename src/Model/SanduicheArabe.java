@@ -7,7 +7,6 @@ package Model;
 
 /**
  *
- * @author fabio
  */
 // codprod = 3
 public class SanduicheArabe extends Sanduiche{

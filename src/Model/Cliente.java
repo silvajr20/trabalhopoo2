@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 /**
  *
- * @author fabio
  */
 public class Cliente extends ValidacaoEntradaTM{
     private String codcli;

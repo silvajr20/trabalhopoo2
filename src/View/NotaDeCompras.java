@@ -7,7 +7,6 @@ package View;
 
 /**
  *
- * @author Avenger
  */
 public class NotaDeCompras extends javax.swing.JFrame {
 

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 /**
  *
- * @author fabio
  */
 public class Pedido {
     private int nuped;
